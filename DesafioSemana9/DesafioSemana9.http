@@ -1,0 +1,6 @@
+@DesafioSemana9_HostAddress = http://localhost:5022
+
+GET {{DesafioSemana9_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
