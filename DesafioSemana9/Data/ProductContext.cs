@@ -11,4 +11,7 @@ public class ProductContext : DbContext
     }
 
     public DbSet<Product> Products { get; set; }
+    public DbSet<Client> Clients { get; set; }
+    public DbSet<Address> Addresses { get; set; }
+
 }
