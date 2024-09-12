@@ -1,17 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace DesafioSemana9.Data.Dtos;
 
-namespace DesafioSemana9.Models;
-
-public class Client
+public class CreateClientDto
 {
-    [Key]
-    [Required]
-    public int Id { get; set; }
     public string Name { get; set; }
     public string Cpf { get; set; }
     public string Email { get; set; }
     public string Profession { get; set; }
     public string Phone { get; set; }
     public int AddressId { get; set; }
-    public virtual Address Address { get; set; }
 }

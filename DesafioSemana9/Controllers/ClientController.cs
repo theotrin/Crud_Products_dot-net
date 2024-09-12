@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DesafioSemana9.Data;
 using DesafioSemana9.Models;
+using AutoMapper;
+using DesafioSemana9.Data.Dtos;
 
 namespace DesafioSemana9.Controllers
 {
@@ -15,10 +17,11 @@ namespace DesafioSemana9.Controllers
     public class ClientController : ControllerBase
     {
         private readonly ProductContext _context;
-
-        public ClientController(ProductContext context)
+        private IMapper _mapper;
+        public ClientController(ProductContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Client
@@ -76,12 +79,25 @@ namespace DesafioSemana9.Controllers
         // POST: api/Client
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Client>> PostClient(Client client)
+        public async Task<ActionResult<Client>> PostClient([FromBody] CreateClientDto clientDto)
         {
+
+
+            Client client = _mapper.Map<Client>(clientDto);
+     
+            var address = await _context.Addresses.FindAsync(clientDto.AddressId);
+     
+            if (address == null)
+     
+            {
+     
+                return BadRequest("Endereço não encontrado");
+     
+            }
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClient", new { id = client.Id }, client);
+            return CreatedAtAction(nameof(GetClient), new { id = client.Id }, clientDto);
         }
 
         // DELETE: api/Client/5

@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DesafioSemana9.Models;
 
-namespace DesafioSemana9.Models;
+namespace DesafioSemana9.Data.Dtos;
 
-public class Address
+public class ReadAddressDto
 {
-    [Key]
-    [Required]
     public int Id { get; set; }
     public string Neighborhood { get; set; }
 
@@ -18,5 +16,4 @@ public class Address
     public string Street { get; set; }
 
     public int Number { get; set; }
-    public virtual Client Client { get; set; }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DesafioSemana9.Data;
 using DesafioSemana9.Models;
+using DesafioSemana9.Data.Dtos;
+using AutoMapper;
 
 namespace DesafioSemana9.Controllers
 {
@@ -15,10 +17,12 @@ namespace DesafioSemana9.Controllers
     public class AddressController : ControllerBase
     {
         private readonly ProductContext _context;
+        private IMapper _mapper;
 
-        public AddressController(ProductContext context)
+        public AddressController(ProductContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Address
@@ -76,8 +80,9 @@ namespace DesafioSemana9.Controllers
         // POST: api/Address
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Address>> PostAddress(Address address)
+        public async Task<ActionResult<Address>> PostAddress([FromBody] CreateAddressDto addressDto)
         {
+            Address address = _mapper.Map<Address>(addressDto);
             _context.Addresses.Add(address);
             await _context.SaveChangesAsync();
 
