@@ -1,0 +1,536 @@
+openapi: 3.0.1
+info:
+  title: COMEX Semana12
+  description: Projeto COMEX é uma API que faz um CRUD de Produtos,Clientes e Endereços
+  contact: 
+    name: email Theo Trindade
+    email: theopinheiro12@gmail.com
+  license:
+   name: MIT
+   url: https://opensource.org/license/mit  
+  version: '1.0'
+paths:
+  /api/Address:
+    get:
+      summary: Recupera todos os endereços
+      tags:
+        - Address
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+    post:
+      summary: Cria um novo endereço
+      tags:
+        - Address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAddressDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateAddressDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateAddressDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Address'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+  /api/Address/{id}:
+    get:
+      summary: Recupera um endereço por ID
+      tags:
+        - Address
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Address'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        404:
+            description: "Não encontrado"
+            content:
+                application/json:
+                  example: "Not Found"
+    put:
+      security:
+      - bearerAuth: [] 
+      summary: Atualiza um endereço baseado no ID
+      tags:
+        - Address
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        '200':
+          description: Success
+        404:
+            description: "Não encontrado"
+        
+        
+    delete:
+      summary: Deleta um endereço por ID
+      tags:
+        - Address
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        404:
+          description: "Não encontrado"
+
+  /api/Client:
+    get:
+      summary: Recupera todos os Clientes
+      tags:
+        - Client
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+    post:
+      summary: Cria um novo Cliente
+      tags:
+        - Client
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateClientDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Client'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+  /api/Client/{id}:
+    get:
+      summary: Recupera um Cliente por ID
+      tags:
+        - Client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Client'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        404:
+            description: "Não encontrado"
+    put:
+      summary: Atualiza um Cliente baseado no ID
+      tags:
+        - Client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '200':
+          description: Success
+    delete:
+      summary: Deleta um Cliente por ID
+      tags:
+        - Client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  /Product:
+    post:
+      summary: Cria um novo Produto
+      tags:
+        - Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateProductDto'
+      responses:
+        '200':
+          description: Success
+    get:
+      summary: Recupera todos os Produtos
+      tags:
+        - Product
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /Product/{id}:
+    get:
+      summary: Recupera um Produto por ID
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+    put:
+      summary: Atualiza um produto baseado no ID
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductDto'
+      responses:
+        '200':
+          description: Success
+    delete:
+      summary: Deleta um endereço por ID
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Address:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        neighborhood:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        additionalInfo:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        street:
+          type: string
+          nullable: true
+        number:
+          type: integer
+          format: int32
+        client:
+          $ref: '#/components/schemas/Client'
+      additionalProperties: false
+    Client:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        cpf:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        profession:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        addressId:
+          type: integer
+          format: int32
+        address:
+          $ref: '#/components/schemas/Address'
+      additionalProperties: false
+    CreateAddressDto:
+      type: object
+      properties:
+        neighborhood:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        additionalInfo:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        street:
+          type: string
+          nullable: true
+        number:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CreateClientDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        cpf:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        profession:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        addressId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CreateProductDto:
+      required:
+        - name
+        - price
+        - quantity
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Product:
+      required:
+        - id
+        - name
+        - price
+        - quantity
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          minLength: 1
+          type: string
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
+      additionalProperties: false
+    UpdateProductDto:
+      required:
+        - name
+        - price
+        - quantity
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
+      additionalProperties: false
+
